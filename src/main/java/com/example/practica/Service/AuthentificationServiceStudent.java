@@ -1,14 +1,16 @@
 package com.example.practica.Service;
 
-import com.example.practica.Auth.AuthentificationRequest;
+import com.example.practica.Auth.AuthentificationRequestStudent;
 import com.example.practica.Auth.AuthentificationResponse;
-import com.example.practica.Auth.RegisterRequest;
+import com.example.practica.Auth.RegisterRequestStudent;
 import com.example.practica.Config.JwtService;
 import com.example.practica.Entity.Role;
 import com.example.practica.Entity.Student;
 import com.example.practica.Repo.StudentRepo;
-import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,15 +18,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class AuthentificationService {
+public class AuthentificationServiceStudent {
 private final StudentRepo studentRepo;
 private final PasswordEncoder passwordEncoder;
 private final JwtService jwtService;
 private final AuthenticationManager authenticationManager;
 
-    public AuthentificationResponse register(RegisterRequest request) {
+    public AuthentificationResponse register(RegisterRequestStudent request) {
 
         var student = Student.builder()
+
+
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .email(request.getEmail())
@@ -34,7 +38,12 @@ private final AuthenticationManager authenticationManager;
                 .role(Role.STUDENT)
                 .build();
 
-        studentRepo.save(student);
+        if(studentRepo.existsByEmail(request.getEmail())) {
+return new AuthentificationResponse("Nope");
+}else{
+    studentRepo.save(student);
+
+}
 
        var jwtToken = jwtService.generateToken(student);
 
@@ -43,7 +52,7 @@ private final AuthenticationManager authenticationManager;
             .build();
     }
 
-    public AuthentificationResponse authentificate(AuthentificationRequest request) {
+    public AuthentificationResponse authenticate(AuthentificationRequestStudent request) {
 
 authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(

@@ -57,6 +57,9 @@ public  class Student implements UserDetails {
         return password;
     }
 
+    @ManyToMany(mappedBy = "student")
+    private Set<StudentDetails> studentDetails = new HashSet<>();
+
     @Override
     public String getUsername() {
         return email;

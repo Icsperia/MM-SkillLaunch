@@ -7,6 +7,6 @@ import java.util.List;
 
 
 public enum Role {
-STUDENT, ADMIN;
+STUDENT, ADMIN, COMPANIE;
 
 }

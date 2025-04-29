@@ -1,11 +1,9 @@
 package com.example.practica.Auth;
 
-import com.example.practica.Entity.Student;
-import com.example.practica.Service.AuthentificationService;
-import com.nimbusds.openid.connect.sdk.AuthenticationRequest;
+import com.example.practica.Service.AuthentificationServiceCompanie;
+import com.example.practica.Service.AuthentificationServiceStudent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,18 +14,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthentificationController {
 
-private final AuthentificationService authentificationService;
+private final AuthentificationServiceStudent authentificationServiceStudent;
 
+private final AuthentificationServiceCompanie authentificationServiceCompanie;
 
-
-    @PostMapping("/register")
-    public ResponseEntity<AuthentificationResponse> register(@RequestBody RegisterRequest request) {
-        return ResponseEntity.ok(authentificationService.register(request));
+    @PostMapping("/register/student")
+    public ResponseEntity<AuthentificationResponse> register(@RequestBody RegisterRequestStudent request) {
+        return ResponseEntity.ok(authentificationServiceStudent.register(request));
 }
 
-@PostMapping("/login")
-    public ResponseEntity<AuthentificationResponse> register(@RequestBody AuthentificationRequest request) {
-    return ResponseEntity.ok(authentificationService.authentificate(request));
+@PostMapping("/login/student")
+    public ResponseEntity<AuthentificationResponse> register(@RequestBody AuthentificationRequestStudent request) {
+    return ResponseEntity.ok(authentificationServiceStudent.authenticate(request));
 }
+
+
+    @PostMapping("/register/companie")
+    public ResponseEntity<AuthentificationResponse> register(@RequestBody RegisterRequestCompanie request) {
+        return ResponseEntity.ok(authentificationServiceCompanie.register(request));
+    }
+
+    @PostMapping("/login/companie")
+    public ResponseEntity<AuthentificationResponse> register(@RequestBody AuthentificationRequestCompanie request) {
+
+        return ResponseEntity.ok(authentificationServiceCompanie.authenticate(request));
+    }
 
 }

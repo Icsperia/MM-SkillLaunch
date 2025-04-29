@@ -1,13 +1,16 @@
+
 package com.example.practica.Config;
 
+import com.example.practica.Repo.CompanieRepo;
 import com.example.practica.Repo.StudentRepo;
-import com.example.practica.Service.StudentService;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,38 +19,35 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Configuration
 @RequiredArgsConstructor
+
 public class ApplicationConfig {
-private final StudentRepo studentRepo;
 
-
-@Bean
-    public UserDetailsService userDetailsService(){
-    return username -> studentRepo.findByEmail(username)
-            .orElseThrow(() -> new UsernameNotFoundException("Nope"));
-
-}
-
+private final ComposedUserDetails composedUserDetails;
 
 @Bean
-    public AuthenticationProvider authetificationProvider(){
+    public AuthenticationProvider authetificationProviderStudent(){
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService());
+
+        authProvider.setUserDetailsService(composedUserDetails);
+
         authProvider.setPasswordEncoder(passwordEncoder());
        return authProvider;
 }
-@Bean
+
+
+    @Bean
 public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception{
     return config.getAuthenticationManager();
-
 }
-
 
 @Bean
    public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
-
     }
 
 

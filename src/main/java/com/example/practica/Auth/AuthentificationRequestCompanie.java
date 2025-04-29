@@ -3,14 +3,17 @@ package com.example.practica.Auth;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Data
+@RequiredArgsConstructor
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
-public class AuthentificationRequest {
+public class AuthentificationRequestCompanie {
 
     private String email;
     private String password;
+
+
+
 }

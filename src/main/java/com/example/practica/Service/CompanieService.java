@@ -1,6 +1,6 @@
 package com.example.practica.Service;
 
-import com.example.practica.Repo.StudentRepo;
+import com.example.practica.Repo.CompanieRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,12 +9,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
+public class CompanieService implements UserDetailsService {
+    private final CompanieRepo companieRepo;
 
-public class StudentService implements UserDetailsService {
-
-private final StudentRepo studentRepo;
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-       return this.studentRepo.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("Nope"));
+        return this.companieRepo.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("Nope"));
     }
 }
