@@ -33,8 +33,6 @@ private final ComposeDetailsService composeDetailsService;
         final String authHeader = request.getHeader("Authorization");
         final String tokenStudent;
         final String userEmailStudent;
-        final String tokenCompanie;
-        final String userEmailCompanie;
 
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
@@ -62,28 +60,7 @@ private final ComposeDetailsService composeDetailsService;
             filterChain.doFilter(request, response);
 
         }
-/*
-        tokenCompanie = authHeader.substring(7);
-        userEmailCompanie = jwtService.extractUsername(tokenCompanie);
-        if (userEmailCompanie != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            Companie companie = (Companie) this.userDetailsServiceCompanies.loadUserByUsername(userEmailCompanie);
-            if (jwtService.isTokenvalid(tokenCompanie, companie)) {
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        companie,
-                        null,
-                        companie.getAuthorities()
-                );
-                authToken.setDetails(
-                        new WebAuthenticationDetailsSource().buildDetails(request)
-                );
-                SecurityContextHolder.getContext().setAuthentication(authToken);
 
-            }
-            filterChain.doFilter(request, response);
-
-        }
-
-*/
     }
     }
 

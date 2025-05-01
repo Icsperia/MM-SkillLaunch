@@ -1,19 +1,24 @@
 package com.example.practica.Service;
 
+import com.example.practica.Entity.Companie;
 import com.example.practica.Repo.CompanieRepo;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-@Service
+import java.util.List;
 @AllArgsConstructor
-public class CompanieService implements UserDetailsService {
-    private final CompanieRepo companieRepo;
+@Service
+public class CompanieService {
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return this.companieRepo.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("Nope"));
+public final CompanieRepo companieRepo;
+
+   public  List<Companie> findAll() {
+        return companieRepo.findAll();
     }
+
+    public Companie findById(Long id) {
+        return companieRepo.findById(id).get();
+    }
+
+
 }

@@ -4,7 +4,6 @@ import com.example.practica.Repo.CompanieRepo;
 import com.example.practica.Repo.StudentRepo;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,9 +22,7 @@ public class ComposedUserDetails implements UserDetailsService {
     public UserDetailsService userDetailsServiceStudents() {
         return username -> studentRepo.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Nope"));
-
     }
-
 
     public UserDetailsService userDetailsServiceCompanies() {
         return username -> companieRepo.findByEmail(username)

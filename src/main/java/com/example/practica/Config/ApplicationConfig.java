@@ -1,26 +1,15 @@
 
 package com.example.practica.Config;
 
-import com.example.practica.Repo.CompanieRepo;
-import com.example.practica.Repo.StudentRepo;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Configuration
 @RequiredArgsConstructor
@@ -30,13 +19,11 @@ public class ApplicationConfig {
 private final ComposedUserDetails composedUserDetails;
 
 @Bean
-    public AuthenticationProvider authetificationProviderStudent(){
+    public AuthenticationProvider authetificationProvider(){
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-
         authProvider.setUserDetailsService(composedUserDetails);
-
         authProvider.setPasswordEncoder(passwordEncoder());
-       return authProvider;
+        return authProvider;
 }
 
 

@@ -1,6 +1,7 @@
 package com.example.practica.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,6 +21,7 @@ import java.util.Set;
         @UniqueConstraint(columnNames = {"parola"}),
         @UniqueConstraint(columnNames = {"nume_companie"})
 })
+
 @NoArgsConstructor
 @AllArgsConstructor
 public class Companie implements UserDetails {
@@ -32,7 +34,7 @@ public class Companie implements UserDetails {
     private Long id;
 
     private String name;
-
+    @Email
     private String email;
 
     private String password;
@@ -42,6 +44,9 @@ public class Companie implements UserDetails {
     @ManyToMany(mappedBy = "companie")
     private Set<CompanieDetails> companieDetails= new HashSet<>();
 
+
+    @OneToOne(mappedBy = "companie")
+    private TokenCompanie companieToken;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

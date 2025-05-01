@@ -1,14 +1,19 @@
 package com.example.practica.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
 import java.util.*;
 
+@Getter
+@Setter
 @Entity
 @Builder
 @RequiredArgsConstructor
@@ -16,7 +21,7 @@ import java.util.*;
 
 @Table(name = "Student", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"email_institutional"}),
-        @UniqueConstraint(columnNames = {"parola"})
+
 })
 
 public  class Student implements UserDetails {
@@ -24,6 +29,7 @@ public  class Student implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
     @Column(name = "prenume")
@@ -32,6 +38,10 @@ public  class Student implements UserDetails {
     @Column(name = "nume")
     private String lastName;
     @Column(name = "email_institutional")
+
+    @Email
+    @Pattern(regexp = "(?i)^[a-z0-9._%+-]+@(student|stud|stu|poli|poli\\.buc|uni)?\\.?[a-z0-9-]+\\.(edu\\.ro|ro)$")
+
     private String email;
 
     @Column(name = "parola")
@@ -43,8 +53,20 @@ public  class Student implements UserDetails {
     @Column(name = "universitate")
     private String universitate;
 
+    @OneToOne (mappedBy = "student")
+    private TokenStudent tokenStudent;
+
+    @JsonBackReference
+    @OneToOne (mappedBy = "student")
+    private StudentDetails studentDetails;
+
+
+
+
     @Enumerated(EnumType.STRING)
     private Role role;
+
+
 
 
     @Override
@@ -57,8 +79,7 @@ public  class Student implements UserDetails {
         return password;
     }
 
-    @ManyToMany(mappedBy = "student")
-    private Set<StudentDetails> studentDetails = new HashSet<>();
+
 
     @Override
     public String getUsername() {

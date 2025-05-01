@@ -1,9 +1,8 @@
 package com.example.practica.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.List;
@@ -13,26 +12,22 @@ import java.util.Set;
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Table(name = "StudentDetails")
 public class StudentDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-
     private String description;
-
     private String Skills;
-
     private String Experience;
-
     private String JobTitles;
 
-    @ManyToMany
-    @JoinTable(name="studentJoin",
-            joinColumns = @JoinColumn(name="studentId"),
-            inverseJoinColumns = @JoinColumn(name="studentDetailsId")
-    )
+    @JsonManagedReference
+@OneToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
 
-private Set<Student> student= new HashSet<>();}
+}
 

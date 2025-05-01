@@ -6,14 +6,14 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
-@AllArgsConstructor
 @Builder
-public class AuthentificationRequestCompanie {
+@AllArgsConstructor
+@RequiredArgsConstructor
+public class AuthentificationResponseCompanie {
 
+    private String token;
+    private String tokenCompanie;
     private String email;
-    private String password;
-
 
 
 

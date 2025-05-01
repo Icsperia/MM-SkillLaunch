@@ -15,9 +15,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ComposeDetailsService implements UserDetailsService {
     @Autowired
-    private final StudentService studentService;
+    private final StudentServiceUDS studentServiceUDS;
     @Autowired
-    private final CompanieService companieService;
+    private final CompanieServiceUDS companieServiceUDS;
 
     private List<UserDetailsService> services;
 
@@ -25,8 +25,8 @@ public class ComposeDetailsService implements UserDetailsService {
 @PostConstruct
     public void setServices() {
     List<UserDetailsService> services = new ArrayList<>();
-    services.add(this.studentService);
-    services.add(this.companieService);
+    services.add(this.studentServiceUDS);
+    services.add(this.companieServiceUDS);
 }
 
     @Override
