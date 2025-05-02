@@ -36,6 +36,7 @@ public class ComposedUserDetails implements UserDetailsService {
         this.serviceList = services;
     }
 
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         for (UserDetailsService service : serviceList) {

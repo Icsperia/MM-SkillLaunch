@@ -38,15 +38,22 @@ public class Companie implements UserDetails {
     private String email;
 
     private String password;
+    private String description;
+    private String fieldOfActivity;
+    private String jobs;
+    private String reviews;
+
+
+
+
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    @ManyToMany(mappedBy = "companie")
-    private Set<CompanieDetails> companieDetails= new HashSet<>();
 
 
     @OneToOne(mappedBy = "companie")
     private TokenCompanie companieToken;
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

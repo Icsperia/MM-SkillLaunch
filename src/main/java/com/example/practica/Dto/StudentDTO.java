@@ -10,6 +10,10 @@ private Long id;
 private String firstName;
 private String lastName;
 private String email;
+private String description;
+private String skills;
+private String experience;
+private String jobTitles;
 
 
 }

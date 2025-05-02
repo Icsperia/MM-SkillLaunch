@@ -1,11 +1,8 @@
 package com.example.practica.Controller;
 
 import com.example.practica.Auth.*;
-import com.example.practica.DTO.CompanieDto;
-import com.example.practica.DTO.CompanieMapper;
-import com.example.practica.DTO.StudentMapper;
-import com.example.practica.Entity.Companie;
-import com.example.practica.Entity.Student;
+import com.example.practica.Mapper.CompanieMapper;
+import com.example.practica.Mapper.StudentMapper;
 import com.example.practica.Repo.CompanieRepo;
 import com.example.practica.Repo.StudentRepo;
 import com.example.practica.Service.AuthentificationServiceCompanie;
@@ -14,8 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")

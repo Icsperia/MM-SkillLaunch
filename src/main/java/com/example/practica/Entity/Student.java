@@ -53,12 +53,19 @@ public  class Student implements UserDetails {
     @Column(name = "universitate")
     private String universitate;
 
+
+
+    private String description;
+    private String skills;
+    private String experience;
+    private String jobTitles;
+
+
+
     @OneToOne (mappedBy = "student")
     private TokenStudent tokenStudent;
 
-    @JsonBackReference
-    @OneToOne (mappedBy = "student")
-    private StudentDetails studentDetails;
+
 
 
 

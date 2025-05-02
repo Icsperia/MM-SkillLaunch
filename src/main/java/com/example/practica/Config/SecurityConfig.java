@@ -1,5 +1,6 @@
 package com.example.practica.Config;
 
+import com.example.practica.Entity.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -26,15 +27,26 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) ->
-                 authorize
-                         .requestMatchers("/api/auth/**")
+                 authorize.requestMatchers("/api/auth/**",
+                                 "/api/companie/**",
+                                 "/api/student/**",
+                                 "/api/offers/**",
+                         "/api/offers/findByType/{type}")
                          .permitAll()
-                         .anyRequest()
-                         .authenticated());
+                        /*
+                         .requestMatchers( "/api/companie/**").hasAuthority(Role.COMPANIE.name())
+                         .requestMatchers("/api/student/**").hasAuthority(Role.STUDENT.name())
+                         */
+                         .anyRequest().authenticated()
+
+
+        );
         http.sessionManagement(session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.authenticationProvider(authenticationProvider);
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+
+
 
         /*.formLogin(
                         form -> form

@@ -1,5 +1,6 @@
-package com.example.practica.DTO;
+package com.example.practica.Mapper;
 
+import com.example.practica.DTO.CompanieDto;
 import com.example.practica.Entity.Companie;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,11 @@ public class CompanieMapper
        companieDto.setId(companie.getId());
        companieDto.setName(companie.getName());
        companieDto.setEmail(companie.getEmail());
+       companieDto.setDescription(companie.getDescription());
+       companieDto.setJobs(companie.getJobs());
+       companieDto.setFieldOfActivity(companie.getFieldOfActivity());
+       companieDto.setReviews(companie.getReviews());
+
        return companieDto;
 
 
@@ -20,6 +26,10 @@ public Companie toEntity(CompanieDto companieDto){
        companie.setId(companieDto.getId());
        companie.setName(companieDto.getName());
        companie.setEmail(companieDto.getEmail());
+       companie.setDescription(companieDto.getDescription());
+       companie.setJobs(companieDto.getJobs());
+       companie.setFieldOfActivity(companieDto.getFieldOfActivity());
+       companie.setReviews(companieDto.getReviews());
        return companie;
 }
 
