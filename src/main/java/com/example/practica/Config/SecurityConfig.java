@@ -27,12 +27,10 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) ->
-                 authorize.requestMatchers("/api/auth/**",
-                                 "/api/companie/**",
-                                 "/api/student/**",
-                                 "/api/offers/**",
-                         "/api/offers/findByType/{type}")
-                         .permitAll()
+                 authorize.requestMatchers("/api/auth/**","/api/companie/**","/api/student/**","api/offers\"").permitAll()
+                        // .requestMatchers("/api/companie/**").hasRole("COMPANIE")
+                         //.requestMatchers("/api/student/**").hasRole("STUDENT")
+
                         /*
                          .requestMatchers( "/api/companie/**").hasAuthority(Role.COMPANIE.name())
                          .requestMatchers("/api/student/**").hasAuthority(Role.STUDENT.name())

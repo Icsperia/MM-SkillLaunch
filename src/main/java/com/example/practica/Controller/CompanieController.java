@@ -7,10 +7,13 @@ import com.example.practica.Repo.CompanieRepo;
 import com.example.practica.Service.CompanieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/companie")
+//@PreAuthorize("hasRole('COMPANIE')")
+
 @RequiredArgsConstructor
 public class CompanieController {
 private final CompanieService companieService;

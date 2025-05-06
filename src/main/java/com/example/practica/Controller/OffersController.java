@@ -16,6 +16,7 @@ import com.example.practica.Service.OpportunitiesService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +24,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("api/offers")
 @RestController
+//@PreAuthorize("hasRole('COMPANIE')")
 public class OffersController {
 
 private final OpportunitiesRepo opportunitiesRepo;
@@ -54,21 +56,5 @@ private final OpportunitiesMapper opportunitiesMapper;
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @GetMapping("/findByType/{type}")
-    public List<OpportunitiesDto> findByType(@PathVariable String type) {
-        List<Opportunities > offersList = opportunitiesService.findByType(type);
-        return offersList.stream().map(opportunitiesMapper::toDto).toList();
-    }
 
-    @GetMapping("/findByLocation/{location}")
-    public List<OpportunitiesDto> findByLocation(@PathVariable String location) {
-        List<Opportunities > offersList = opportunitiesService.findbyLocation(location);
-        return offersList.stream().map(opportunitiesMapper::toDto).toList();
-    }
-
-    @GetMapping("/findAll")
-    public List<OpportunitiesDto> findAll(Opportunities  opportunities) {
-        List<Opportunities > offersList = opportunitiesService.findAll();
-      return offersList.stream().map(opportunitiesMapper::toDto).toList();
-  }
     }

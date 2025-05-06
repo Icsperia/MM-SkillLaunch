@@ -36,9 +36,11 @@ public class OpportunitiesService {
     public List<Opportunities> findByType(String type){
         return opportunitiesRepo.findByType(type);
     }
+
     public List<Opportunities> findAll(){
         return opportunitiesRepo.findAll();
     }
+
     public List<Opportunities> findbyLocation(String location){
         return opportunitiesRepo.findByLocation(location);
     }
