@@ -22,9 +22,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @AllArgsConstructor
-@RequestMapping("api/offers")
+@RequestMapping("/api/offers")
 @RestController
-//@PreAuthorize("hasRole('COMPANIE')")
+
 public class OffersController {
 
 private final OpportunitiesRepo opportunitiesRepo;

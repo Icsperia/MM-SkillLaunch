@@ -15,7 +15,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/student")
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('STUDENT')")
+//@PreAuthorize("hasRole('STUDENT')")
+
 public class StudentController {
 
     private final StudentRepo studentRepo;
@@ -35,7 +36,7 @@ public class StudentController {
 
     @GetMapping("/studentDto/{id}")
     public ResponseEntity<StudentDto> getStudentDto(@PathVariable("id") Long id) {
-      Student student = studentService.findById(id);
+     Student student = studentService.findById(id);
        return ResponseEntity.ok(studentMapper.toDto(student));
     }
 @PutMapping("/studentUpdate/{id}")

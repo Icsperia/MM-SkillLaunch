@@ -8,12 +8,6 @@ import java.util.List;
 public interface OpportunitiesRepo extends JpaRepository<Opportunities, Long> {
 
    List<Opportunities> findByType(String type);
-   List<Opportunities> findByLocation(String category);
+   List<Opportunities> findByLocation(String location);
 
-
-
-/*
-   Offers findByType(String type);
-
- */
 }

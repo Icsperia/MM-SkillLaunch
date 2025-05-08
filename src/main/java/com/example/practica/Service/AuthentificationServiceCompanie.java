@@ -35,7 +35,7 @@ public class AuthentificationServiceCompanie {
                 .role(Role.COMPANIE)
                 .build();
         if (companieRepo.existsByEmail(request.getEmail())) {
-            return new AuthentificationResponseCompanie("NiceTry","","");
+            return new AuthentificationResponseCompanie("NiceTry","");
         } else {
            Companie savedCompanie = companieRepo.save(companie);
 

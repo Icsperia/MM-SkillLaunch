@@ -22,11 +22,11 @@ public final CompanieRepo companieRepo;
     public Companie findById(Long id) {
         return companieRepo.findById(id).get();
     }
-public CompanieDto updateCompanie(Long id, CompanieDto companieDto) {
+
+    public CompanieDto updateCompanie(Long id, CompanieDto companieDto) {
        Companie companie = companieRepo.findById(id).get();
        companie.setDescription(companieDto.getDescription());
        companie.setFieldOfActivity(companieDto.getFieldOfActivity());
-       companie.setJobs(companieDto.getJobs());
        Companie updatedCompanie = companieRepo.save(companie);
        return companieMapper.toDto(updatedCompanie);
 

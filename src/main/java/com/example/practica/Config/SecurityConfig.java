@@ -27,7 +27,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) ->
-                 authorize.requestMatchers("/api/auth/**","/api/companie/**","/api/student/**","api/offers\"").permitAll()
+                 authorize.requestMatchers("/api/auth/**","/api/companie/**","/api/student/**","/api/offers/**").permitAll()
+
                         // .requestMatchers("/api/companie/**").hasRole("COMPANIE")
                          //.requestMatchers("/api/student/**").hasRole("STUDENT")
 
@@ -46,17 +47,6 @@ public class SecurityConfig {
 
 
 
-        /*.formLogin(
-                        form -> form
-                                .loginPage("/login")
-                                .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/users")
-                                .permitAll()
-                ).logout(
-                        logout -> logout
-                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                                .permitAll()
-                );*/
         return http.build();
     }
 

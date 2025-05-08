@@ -24,7 +24,7 @@ public TokenStudent createTokenStudent(String email){
    if(tokenStudent==null){
    tokenStudent=TokenStudent.builder()
             .tokenStudent(UUID.randomUUID().toString())
-            .expires(Instant.now().plusMillis(5*60*60*1000))
+            .expires(Instant.now().plusMillis(60*60*60*1000))
         .student(studentRepo.findByEmail(email).orElseThrow(()->new RuntimeException("No such student")))
             .student(student)
             .build();
@@ -35,6 +35,9 @@ public TokenStudent createTokenStudent(String email){
 return tokenStudent;
 
 }
+
+
+
 
 public TokenStudent verifyStudentToken(String tokenStudent){
    TokenStudent stToken= tokenStudentRepo.findByTokenStudent(tokenStudent).orElseThrow(()->new RuntimeException("No such token"));

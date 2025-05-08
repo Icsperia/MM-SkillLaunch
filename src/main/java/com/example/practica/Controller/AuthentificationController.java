@@ -16,11 +16,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthentificationController {
-private final StudentRepo studentRepo;
-private final CompanieRepo companieRepo;
-
-private final CompanieMapper companieMapper;
-private final StudentMapper studentMapper;
 
 
 private final AuthentificationServiceStudent authentificationServiceStudent;
@@ -35,6 +30,8 @@ private final AuthentificationServiceCompanie authentificationServiceCompanie;
     public ResponseEntity<AuthentificationResponseStudent> register(@RequestBody AuthentificationRequestStudent request) {
     return ResponseEntity.ok(authentificationServiceStudent.authenticate(request));
 }
+
+
 
 
     @PostMapping("/register/companie")

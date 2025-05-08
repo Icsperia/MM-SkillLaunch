@@ -12,7 +12,7 @@ public class StudentMapper {
         studentDto.setFirstName(student.getFirstName());
         studentDto.setLastName(student.getLastName());
         studentDto.setEmail(student.getEmail());
-        studentDto.setId(student.getId());
+
         studentDto.setDescription(student.getDescription());
         studentDto.setEmail(student.getEmail());
         studentDto.setJobTitles(student.getJobTitles());
@@ -25,7 +25,7 @@ public class StudentMapper {
         student.setFirstName(studentDto.getFirstName());
         student.setLastName(studentDto.getLastName());
         student.setEmail(studentDto.getEmail());
-        student.setId(studentDto.getId());
+      
         student.setDescription(studentDto.getDescription());
         student.setJobTitles(studentDto.getJobTitles());
         student.setSkills(studentDto.getSkills());

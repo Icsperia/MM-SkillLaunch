@@ -36,14 +36,14 @@ private final TokenStudentService tokenStudentService;
                 .build();
 
         if (studentRepo.existsByEmail(request.getEmail())) {
-            return new AuthentificationResponseStudent("", "","");
+            return new AuthentificationResponseStudent("N-am idee", "");
         } else {
             Student savedStudent = studentRepo.save(student);
 
             var jwtToken = jwtService.generateToken(savedStudent);
             var studentToken = tokenStudentService.createTokenStudent(student.getEmail());
             return AuthentificationResponseStudent.builder()
-                    .email(savedStudent.getEmail())
+
                     .token(jwtToken)
                     .tokenStudent(studentToken.getTokenStudent())
                     .build();
@@ -66,7 +66,7 @@ var student = studentRepo.findByEmail(request.getEmail()).orElseThrow(null);
         var jwtToken = jwtService.generateToken(student);
         var studentToken= tokenStudentService.createTokenStudent(student.getEmail());
         return  AuthentificationResponseStudent.builder()
-                .email(student.getEmail())
+
                 .token(jwtToken)
                 .tokenStudent(studentToken.getTokenStudent())
                 .build();

@@ -1,5 +1,6 @@
 package com.example.practica.Entity;
 
+import com.example.practica.UUID.GeneratedUuidV7;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
@@ -7,10 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Builder
 @Getter
@@ -33,14 +31,17 @@ public class Companie implements UserDetails {
 
     private Long id;
 
+
+@Column(nullable = false, unique = true)
     private String name;
     @Email
+    @Column(nullable = false, unique = true)
     private String email;
 
     private String password;
     private String description;
     private String fieldOfActivity;
-    private String jobs;
+
     private String reviews;
 
 

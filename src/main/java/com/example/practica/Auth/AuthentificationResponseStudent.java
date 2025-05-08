@@ -13,7 +13,7 @@ public class AuthentificationResponseStudent {
 
 private String token;
 private String tokenStudent;
-private String email;
+
 
 
 

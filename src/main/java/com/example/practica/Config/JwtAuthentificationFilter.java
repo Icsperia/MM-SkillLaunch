@@ -1,7 +1,7 @@
 package com.example.practica.Config;
 
+import com.example.practica.Entity.Companie;
 import com.example.practica.Entity.Student;
-import com.example.practica.Service.ComposeDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,7 +21,7 @@ public class JwtAuthentificationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
 
-private final ComposeDetailsService composeDetailsService;
+private final ComposedUserDetails composedUserDetails;
 
 
     @Override
@@ -33,6 +33,8 @@ private final ComposeDetailsService composeDetailsService;
         final String authHeader = request.getHeader("Authorization");
         final String tokenStudent;
         final String userEmailStudent;
+        final String tokenCompanie;
+        final String userEmailCompanie;
 
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
@@ -44,7 +46,7 @@ private final ComposeDetailsService composeDetailsService;
         tokenStudent = authHeader.substring(7);
         userEmailStudent = jwtService.extractUsername(tokenStudent);
         if (userEmailStudent != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            Student student = (Student) this.composeDetailsService.loadUserByUsername(userEmailStudent);
+            Student student = (Student) this.composedUserDetails.loadUserByUsername(userEmailStudent);
             if (jwtService.isTokenvalid(tokenStudent, student)) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         student,
@@ -57,12 +59,36 @@ private final ComposeDetailsService composeDetailsService;
                 SecurityContextHolder.getContext().setAuthentication(authToken);
 
             }
+
+
+        }
+
+        tokenCompanie = authHeader.substring(7);
+        userEmailCompanie = jwtService.extractUsername(tokenCompanie);
+        if (userEmailCompanie != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                Companie companie = (Companie) this.composedUserDetails.loadUserByUsername(userEmailCompanie);
+            if (jwtService.isTokenvalid(tokenCompanie, companie)) {
+                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                        companie,
+                        null,
+                       companie.getAuthorities()
+                );
+                authToken.setDetails(
+                        new WebAuthenticationDetailsSource().buildDetails(request)
+                );
+                SecurityContextHolder.getContext().setAuthentication(authToken);
+
+            }
             filterChain.doFilter(request, response);
 
         }
 
     }
+
     }
+
+
+
 
 
 

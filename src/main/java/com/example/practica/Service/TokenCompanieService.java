@@ -28,7 +28,7 @@ private final TokenCompanieRepo tokenCompanieRepo;
         if(tokenCompanie==null){
             tokenCompanie=TokenCompanie.builder()
                     .tokenCompanie(UUID.randomUUID().toString())
-                    .expires(Instant.now().plusMillis(5*60*60*1000))
+                    .expires(Instant.now().plusMillis(60*60*60*1000))
                     .companie(companieRepo.findByEmail(email).orElseThrow(()->new RuntimeException("No such student")))
                     .companie( companie)
                     .build();
